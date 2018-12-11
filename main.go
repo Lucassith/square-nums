@@ -7,7 +7,7 @@ import (
 var squares = [...]int{4, 9, 16, 25, 36, 49, 64, 81}
 
 func main() {
-	fmt.Println(getSquareSums(5))
+	fmt.Println(GetSquareSums(15))
 }
 
 func getPairs(n int) map[int][]int {
@@ -55,18 +55,24 @@ func revert(a []int) []int {
 	return a
 }
 
-func getSquareSums(n int) []int {
+func GetSquareSums(n int) []int {
 	pairs := getPairs(n)
 	var solution []int
 	var previous int
 	firstNumber := 1
-	current := firstNumber
-	next := getNextFromPair(current, pairs[current])
+	next := getNextFromPair(firstNumber, pairs[firstNumber])
+	for next == 0 {
+		next = getNextFromPair(firstNumber, pairs[firstNumber])
+		firstNumber++
+		if firstNumber > n {
+			return nil
+		}
+	}
 	for firstNumber <= n && len(solution) != n {
 		if next != 0 && isFree(next, solution) {
 			solution = append(solution, next)
 			previous = next
-			next = getNextFromPair(1, pairs[next])
+			next = getNextFromPair(0, pairs[next])
 		} else {
 			if next == 0 {
 				next = solution[len(solution)-1]

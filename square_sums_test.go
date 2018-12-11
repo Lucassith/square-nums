@@ -28,4 +28,19 @@ var _ = Describe("SquareSums", func() {
 		pairs := getPairs(6)
 		Expect(getNextFromPair(6, pairs[4])).To(Equal(0))
 	})
+
+	It("Should return nil for n = 2", func() {
+		result := GetSquareSums(2)
+		Expect(result).To(HaveLen(0))
+	})
+
+	It("Should count for n = 15", func() {
+		result := GetSquareSums(15)
+		Expect(result).To(HaveLen(15))
+	})
+
+	It("Should count for n = 17", func() {
+		result := GetSquareSums(17)
+		Expect(result).To(HaveLen(17))
+	})
 })
